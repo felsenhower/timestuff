@@ -105,7 +105,7 @@ def print_duration(duration: datetime.timedelta) -> str:
     Returns:
         str. The string representation.
     """
-    return "{:0.0f}".format(duration.total_seconds() / 60)
+    return "{:0.2f}".format(duration.total_seconds() / 3600)
 
 
 def print_time(time: datetime.time) -> str:
@@ -244,7 +244,7 @@ def get_table_content(work_times: Dict[datetime.date,
             end_time = add_duration_on_time(start_time, duration)
             pause_duration = datetime.time(0, 0, 0)
             table_content += (
-                "{} & {} & {} & {} & \\addworktime{{{}}} & \\\\" +
+                "{} & {} & {} & {} & {} & \\\\" +
                 "\\hline \n"
             ).format(
                 day,
@@ -261,7 +261,7 @@ def get_table_content(work_times: Dict[datetime.date,
                 print_duration(vacation[2])
             )
         else:
-            table_content += "{} & & & & & \\\\ \\hline \n".format(day)
+            table_content += "{} & & & & \\nosum{{}} & \\\\ \\hline \n".format(day)
     return table_content
 
 
@@ -443,7 +443,7 @@ def get_selected_date_range(args: argparse.Namespace) -> \
 def main() -> None:
     args = get_args()
     date_range = get_selected_date_range(args)
-    vacations = args.v
+    vacations = args.v or []
     df = pd.read_csv(args.input_filename, quotechar="\"")
     with open("template.tex", "r") as f:
         template = f.read()
