@@ -1,0 +1,69 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{lmodern}
+\usepackage[left=3cm,top=4cm,bottom=3cm,right=3cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{multirow}
+\colorlet{weekendcolor}{black!20!white}
+\newcommand{\weekend}{\rowcolor{weekendcolor}}
+\newcommand{\vacation}[1]{& & & \addworktime{#1} & Urlaub}
+\usepackage{pgf}
+\usepackage{pgfplots}
+\pgfkeys{/pgf/fpu}
+\pgfkeys{
+    /pgf/number format/precision=2,
+    /pgf/number format/fixed=true,
+    /pgf/number format/fixed zerofill=true,
+    /pgf/number format/assume math mode=true,
+    /pgf/number format/use comma=true
+}
+\newcounter{worktime}
+\newcommand{\minutestohours}[1]{
+    \pgfmathparse{#1/60}\pgfmathprintnumber{\pgfmathresult}
+}
+\newcommand{\addworktime}[1]{
+    \addtocounter{worktime}{#1}
+    \minutestohours{#1}
+}
+\pagestyle{fancy}
+\lhead{Datum:}
+\rhead{%
+    %placeholder_1%
+}
+\pagenumbering{gobble}
+\renewcommand\familydefault{\sfdefault}
+\setlength{\parindent}{0pt}
+\begin{document}
+
+\begin{tabularx}{\textwidth}{|c|*5{>{\centering\arraybackslash}X|}}
+    \hline
+    \multirow[c]{2}{*}{Tag} &
+    \multicolumn{2}{c|}{Arbeitszeit} &
+    \multirow[c]{2}{*}{Pause} &
+    \multirow[c]{2}{*}{Stunden} &
+    \multirow[c]{2}{*}{Kommentar} \\
+    \cline{2-3}
+    & von & bis & & & \\
+    \hline
+%placeholder_2%
+\end{tabularx}
+
+\vspace*{5mm}
+
+\hfill Gesamt: \qquad \minutestohours{\theworktime}
+
+\vspace*{10mm}
+
+\small
+
+\begin{tabularx}{\textwidth}{@{}p{40mm}X@{}p{70mm}}
+\cline{1-1} \cline{3-3}
+\\[-3.5mm]
+Datum & & Unterschrift Mitarbeiter
+\end{tabularx}
+
+\end{document}
