@@ -20,7 +20,8 @@
     output-decimal-marker={,},
     round-integer-to-decimal=true,
     round-mode=places,
-    round-precision=2
+    round-precision=2,
+    table-format=1.2
 }
 \makeatletter
 \newcolumntype\summed{}
@@ -47,7 +48,7 @@
 \setlength{\parindent}{0pt}
 \begin{document}
 
-\begin{tabularx}{\textwidth}{|c|*3{>{\centering\arraybackslash}X|}\summed[table-format=1.2]\totalworktime{>{\centering\arraybackslash}X}|>{\centering\arraybackslash}X|}
+\begin{tabularx}{\textwidth}{|c|*3{>{\centering\arraybackslash}X|}\summed\totalworktime{>{\centering\arraybackslash}X}|>{\centering\arraybackslash}X|}
     \hline
     \multirow[c]{2}{*}{Tag} &
     \multicolumn{2}{c|}{Arbeitszeit} &
